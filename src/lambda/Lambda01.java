@@ -2,6 +2,7 @@ package lambda;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class Lambda01 {
@@ -22,6 +23,10 @@ public class Lambda01 {
         farkliTekKüp(l);
         System.out.println();
         ciftSayiKareToplam(l);
+        System.out.println();
+        tekrarsizCiftKupCarpimi(l);
+        System.out.println();
+        siraliYazdir(l);
 
 
     }
@@ -71,8 +76,27 @@ public class Lambda01 {
     }
 //tekrarlıları sil, çiftlerin karelerinin toplamı.
 private static void ciftSayiKareToplam(List<Integer> l) {
-        l.stream().distinct().filter(t->t%2==1).map(t-> t*t)
+    System.out.println("buraya bir bosluk");
+    System.out.println(l.stream().distinct().filter(t -> t % 2 == 0).map(t -> t * t).reduce(0, (x, y) -> x + y));
+//yazdirmanın iki yolu: sona .koy sout yaz içine al soutun.
+    //diğer yol.
+    int sayi= l.stream().distinct().filter(t -> t % 2 == 0).map(t -> t * t).reduce(0, (x, y) -> x + y);
+    System.out.println(sayi);
+    //diğer üçüncü yol
+   // komple return type ı voidden Integer<> yaparak return type yaparsın. yukarda da metodu sout içine alırsın. çaat.
+
 }
+//listedeki tekrarlı elemanları silip çift sayı olanların küplerinin çarpımı
+public static void tekrarsizCiftKupCarpimi(List<Integer> l){
+    Integer a=  l.stream().distinct().filter(t->t%2==0).map(t->t*t*t).reduce(1, (t,u)->t*u);
+    System.out.print(a);
+}
+//7)Listedeki elemanları sıralayarak ve ters sıralayarak yazdır
 
+    public static void siraliYazdir(List<Integer> l){
+        l.stream().sorted().forEach(t-> System.out.print(t+" "));
+        System.out.println();
+        l.stream().sorted(Comparator.reverseOrder()).forEach(a-> System.out.print(a+" "));
 
+    }
 }
